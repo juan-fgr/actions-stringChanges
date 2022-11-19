@@ -9507,22 +9507,6 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 4375:
-/***/ ((module) => {
-
-module.exports = eval("require")("dayjs");
-
-
-/***/ }),
-
-/***/ 3868:
-/***/ ((module) => {
-
-module.exports = eval("require")("dayjs/plugin/utc");
-
-
-/***/ }),
-
 /***/ 1756:
 /***/ ((module) => {
 
@@ -9703,24 +9687,24 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(8864);
 const github = __nccwpck_require__(6366);
 
-const dayjs = __nccwpck_require__(4375);
-const dayjsPluginUTC = __nccwpck_require__(3868)
-
-dayjs.extend(dayjsPluginUTC)
-
 async function main() {
 	try {
-		const timezone = core.getInput('timeZone');// default: 0
-		const formatStr = core.getInput('format');// default: ''
-		console.log('time zone: ', timezone)
-		console.log('time format: ', formatStr)
-		const str = dayjs().utcOffset(timezone).format(formatStr)
-		console.log("time formatStr: ", str)
+	    const inputStr = core.getInput('string');
+	    console.log(`Manipulating string: ${inputStr}`);
 
-		core.setOutput("time", str);
+	    const lowercase = inputStr.toLowerCase();
+	    console.log(`lowercase: ${lowercase}`);
+	    core.setOutput("lowercase", lowercase);
 
+	    const uppercase = inputStr.toUpperCase();
+	    console.log(`uppercase: ${uppercase}`);
+	    core.setOutput("uppercase", uppercase);
+
+	    const capitalized = inputStr.charAt(0).toUpperCase() + inputStr.slice(1).toLowerCase();
+	    console.log(`capitalized: ${capitalized}`);
+	    core.setOutput("capitalized", capitalized);
 	} catch (error) {
-		core.setFailed(error.message);
+	    core.setFailed(error.message);
 	}
 }
 
