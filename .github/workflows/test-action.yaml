@@ -1,0 +1,29 @@
+name: test-action
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [10]
+
+    steps:
+      - name: Checkout Git Source
+        uses: actions/checkout@v3
+
+      - name: test1
+        id: cadena
+        uses: juan-fgr/actions-stringChanges@v1.0
+        with:
+          string: "A SIMPLE TEST TO lowercase"
+
+      - name: test1-output
+        env:
+          CADENA: "${{ steps.cadena.outputs.lowercase }}"
+        run: |
+          echo $CADENA
